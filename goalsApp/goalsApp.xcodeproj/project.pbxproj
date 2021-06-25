@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5857F42265D1DA8005D019A /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5857F41265D1DA8005D019A /* AddViewController.swift */; };
+		B5B492EA2685E59D007E10EE /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B492E92685E59D007E10EE /* ScheduleTableViewCell.swift */; };
 		B5D4C8A92659393900EA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4C8A82659393900EA6557 /* AppDelegate.swift */; };
 		B5D4C8AB2659393900EA6557 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4C8AA2659393900EA6557 /* SceneDelegate.swift */; };
 		B5D4C8AD2659393900EA6557 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4C8AC2659393900EA6557 /* ViewController.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5857F41265D1DA8005D019A /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		B5B492E92685E59D007E10EE /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		B5D4C8A52659393900EA6557 /* goalsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = goalsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D4C8A82659393900EA6557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5D4C8AA2659393900EA6557 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				B5D4C8A82659393900EA6557 /* AppDelegate.swift */,
 				B5D4C8AA2659393900EA6557 /* SceneDelegate.swift */,
 				B5D4C8AC2659393900EA6557 /* ViewController.swift */,
+				B5857F41265D1DA8005D019A /* AddViewController.swift */,
+				B5B492E92685E59D007E10EE /* ScheduleTableViewCell.swift */,
 				B5D4C8AE2659393900EA6557 /* Main.storyboard */,
 				B5D4C8B12659393A00EA6557 /* Assets.xcassets */,
 				B5D4C8B32659393A00EA6557 /* LaunchScreen.storyboard */,
@@ -260,7 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5D4C8AD2659393900EA6557 /* ViewController.swift in Sources */,
+				B5B492EA2685E59D007E10EE /* ScheduleTableViewCell.swift in Sources */,
 				B5D4C8A92659393900EA6557 /* AppDelegate.swift in Sources */,
+				B5857F42265D1DA8005D019A /* AddViewController.swift in Sources */,
 				B5D4C8AB2659393900EA6557 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
