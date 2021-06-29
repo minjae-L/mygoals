@@ -14,13 +14,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var scheduleTableView: UITableView!
     var titleArr = [String]()
     
+    // add뷰에서 보낸 일정을 받는 함수
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc2 = segue.destination as? AddViewController {
             vc2.delegate = self
         }
     }
     
-    // 배열이 빈경우 일정추가 텍스트 설정 함수
+    // 일정추가 텍스트 설정 함수
     func setupMessageLabel(label: UILabel) {
         label.font.withSize(20)
         label.text = "일정을 추가해주세요."

@@ -29,8 +29,10 @@ class AddViewController: UIViewController  {
         } else {
             str = "\(titleText)@@@" + "\(discText)"
         }
+        
         delegate?.titleArr.append(str)
         delegate?.scheduleTableView.reloadData()
+        
         print(delegate?.titleArr)
         self.navigationController?.popViewController(animated: true)
     }
@@ -48,6 +50,7 @@ class AddViewController: UIViewController  {
     
 }
 
+// 텍스트뷰 placeholder
 extension AddViewController: UITextViewDelegate {
     
     func textViewSetupView() {
