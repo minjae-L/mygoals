@@ -10,33 +10,41 @@
  
 
 import UIKit
+import Firebase
+
+
+
 
 class AddViewController: UIViewController  {
     
+    // firebase clouldstore
+    let db = Firestore.firestore()
     var delegate: ViewController?
-    
-    
+    var ref: DocumentReference? = nil
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var discriptionTextView: UITextView!
     
+    // 일정 추가버튼 이벤트
     @IBAction func addWork(_ sender: Any) {
         guard let titleText = titleTextField.text else { return }
         guard let discText = discriptionTextView.text  else { return }
-        var str : (String)
-        if discText == "내용입력" {
-            str = "\(titleText)@@@"
-        } else {
-            str = "\(titleText)@@@" + "\(discText)"
+        db.collection("goals").document("\(titleText)").setData([
+            "title" : "\(titleText)",
+            "discription" : "\(discText)"
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
         }
-        
-        delegate?.titleArr.append(str)
+        delegate?.titleArr.append(titleText)
         delegate?.scheduleTableView.reloadData()
         
         print(delegate?.titleArr)
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     
     override func viewDidLoad() {

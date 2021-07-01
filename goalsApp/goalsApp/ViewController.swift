@@ -7,12 +7,34 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var scheduleTableView: UITableView!
+ 
     var titleArr = [String]()
+    
+    // firebase
+    var db = Firestore.firestore()
+    
+    // 일정 불러오기
+    func loadGoals() {
+        db.collection("goals").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    self.titleArr.append(document.documentID)
+                }
+//                DispatchQueue.main.async {
+                    self.scheduleTableView.reloadData()
+//                }
+            }
+        }
+        
+    }
     
     // add뷰에서 보낸 일정을 받는 함수
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,8 +61,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    
     override func viewDidLoad() {
+        loadGoals()
         scheduleTableView.delegate = self
         scheduleTableView.dataSource = self
         if titleArr.isEmpty {
@@ -48,7 +70,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         super.viewDidLoad()
     }
-
-
 }
 

@@ -8,6 +8,7 @@ target 'goalsApp' do
   # Pods for goalsApp
 
   pod 'Firebase/Analytics'
+  pod 'Firebase/Firestore'
   target 'goalsAppTests' do
     inherit! :search_paths
     # Pods for testing
