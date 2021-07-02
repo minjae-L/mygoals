@@ -29,21 +29,29 @@ class AddViewController: UIViewController  {
     @IBAction func addWork(_ sender: Any) {
         guard let titleText = titleTextField.text else { return }
         guard let discText = discriptionTextView.text  else { return }
-        db.collection("goals").document("\(titleText)").setData([
-            "title" : "\(titleText)",
-            "discription" : "\(discText)"
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-        delegate?.titleArr.append(titleText)
-        delegate?.scheduleTableView.reloadData()
         
-        print(delegate?.titleArr)
-        self.navigationController?.popViewController(animated: true)
+        if titleText == "" {
+            let alert = UIAlertController(title: "안내", message: "제목을 입력해주세요.", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "확인", style: .destructive, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: false, completion: nil)
+        } else {
+            db.collection("goals").document("\(titleText)").setData([
+                "title" : "\(titleText)",
+                "discription" : "\(discText)"
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+            delegate?.titleArr.append(titleText)
+            delegate?.scheduleTableView.reloadData()
+            
+            print(delegate?.titleArr)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     

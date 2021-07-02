@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var scheduleTableView: UITableView!
- 
+    
     var titleArr = [String]()
     
     // firebase
@@ -33,10 +33,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //                }
             }
         }
-        
     }
     
-    // add뷰에서 보낸 일정을 받는 함수
+    //add뷰에서 보낸 일정을 받는 함수
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc2 = segue.destination as? AddViewController {
             vc2.delegate = self
@@ -61,12 +60,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "GoalViewController") as? GoalViewController else { return }
+        print(titleArr[indexPath.row])
+        vc.titleText = titleArr[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     override func viewDidLoad() {
         loadGoals()
         scheduleTableView.delegate = self
         scheduleTableView.dataSource = self
         if titleArr.isEmpty {
             setupMessageLabel(label: messageLabel)
+        } else {
+            messageLabel.text = ""
         }
         super.viewDidLoad()
     }
