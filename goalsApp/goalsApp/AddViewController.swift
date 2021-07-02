@@ -20,7 +20,6 @@ class AddViewController: UIViewController  {
     // firebase clouldstore
     let db = Firestore.firestore()
     var delegate: ViewController?
-    var ref: DocumentReference? = nil
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var discriptionTextView: UITextView!
@@ -36,9 +35,12 @@ class AddViewController: UIViewController  {
             alert.addAction(okAction)
             present(alert, animated: false, completion: nil)
         } else {
+            let nilDate : Timestamp? = nil
             db.collection("goals").document("\(titleText)").setData([
                 "title" : "\(titleText)",
-                "discription" : "\(discText)"
+                "discription" : "\(discText)",
+                "isComplete" : false,
+                "isProceeding" : false
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")

@@ -28,9 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 for document in querySnapshot!.documents {
                     self.titleArr.append(document.documentID)
                 }
-//                DispatchQueue.main.async {
                     self.scheduleTableView.reloadData()
-//                }
             }
         }
     }
@@ -49,6 +47,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         label.textColor = UIColor.lightGray
     }
     
+    
+    
     // 테이블 뷰
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleArr.count
@@ -61,9 +61,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         guard let vc = storyboard?.instantiateViewController(identifier: "GoalViewController") as? GoalViewController else { return }
-        print(titleArr[indexPath.row])
+        
+        db.collection("goals").document("\(titleArr[indexPath.row])").getDocument { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting Documents: \(err)")
+            } else {
+                if let discText = querySnapshot?.get("discription") as? String {
+                        vc.discriptionText = discText
+                    vc.discriptionTextView.text = discText
+                }
+                if let proceedBool = querySnapshot?.get("isProceeding") as? Bool {
+                        vc.isProceedingBool = proceedBool
+                    if proceedBool == true {
+                        vc.startButton.setTitle("진행중", for: .normal)
+                    } else {
+                        vc.startButton.setTitle("시작하기", for: .normal)
+                    }
+                }
+            }
+        }
         vc.titleText = titleArr[indexPath.row]
+        
         self.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
